@@ -1,14 +1,24 @@
 package com.example.systemdesigning;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 public class ServiceSelection extends AppCompatActivity {
 
+    RadioButton r1,r2,r3,r4,r5,r6;
+    Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +29,31 @@ public class ServiceSelection extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
         }
+        b = findViewById(R.id.button2);
+        r1 = findViewById(R.id.radioButton1);
+        r2 = findViewById(R.id.radioButton);
+        r3 = findViewById(R.id.radioButton2);
+        r4 = findViewById(R.id.radioButton3);
+        r5 = findViewById(R.id.radioButton4);
+        r6 = findViewById(R.id.radioButton5);
+
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(r1.isChecked() || r2.isChecked() || r3.isChecked() || r4.isChecked() || r5.isChecked() || r6.isChecked()){
+                    Intent i = new Intent(ServiceSelection.this,SlotBooking.class);
+                    startActivity(i);
+                    YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(b);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Please select something",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
 
     }
 }
