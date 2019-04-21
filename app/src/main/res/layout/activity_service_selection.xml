@@ -60,88 +60,107 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="345dp"
-            android:layout_height="58dp"
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="AC General Cleaning Service                  Rs.499"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton1" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="345dp"
+                android:layout_height="58dp"
+                android:onClick="onclicked"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="AC General Cleaning Service                Rs.499"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton1" />
 
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="345dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="AC Repair(charge per visit)                    Rs.149"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="345dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="onclicked"
+                android:layout_weight="1"
+                android:text="AC Repair(charge per visit)                    Rs.149"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="346dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="AC Installation                                       Rs.1200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.558"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="346dp"
+                android:layout_height="58dp"
+                android:onClick="onclicked"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="AC Installation                                       Rs.1200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.558"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton" />
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="346dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="AC Uninstallation                                    Rs.700"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.575"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="346dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="onclicked"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="AC Uninstallation                                    Rs.700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.575"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
 
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="346dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="AC Installation and Uninstallation      Rs.1800"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.575"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton3" />
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="346dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="AC Installation and Uninstallation      Rs.1800"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.575"
+                android:onClick="onclicked"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton3" />
 
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="346dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="AC Gas Filling and Refilling                       Rs.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.575"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton4" />
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="346dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="onclicked"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="AC Gas Filling and Refilling                       Rs.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.575"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton4" />
+        </RadioGroup>
+
 
 
     </android.support.constraint.ConstraintLayout>
@@ -149,9 +168,9 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="428dp"
-        android:layout_height="52dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/toolbar"
         android:fontFamily="@font/acme"

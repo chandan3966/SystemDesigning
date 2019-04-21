@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -18,6 +19,7 @@ import com.daimajia.androidanimations.library.YoYo;
 public class ServiceSelection extends AppCompatActivity {
 
     RadioButton r1,r2,r3,r4,r5,r6;
+    RadioGroup rg;
     Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +32,6 @@ public class ServiceSelection extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
         }
         b = findViewById(R.id.button2);
-        r1 = findViewById(R.id.radioButton1);
-        r2 = findViewById(R.id.radioButton);
-        r3 = findViewById(R.id.radioButton2);
-        r4 = findViewById(R.id.radioButton3);
-        r5 = findViewById(R.id.radioButton4);
-        r6 = findViewById(R.id.radioButton5);
-
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,4 +51,47 @@ public class ServiceSelection extends AppCompatActivity {
 
 
     }
+
+    public void onclicked(View v){
+        rg = findViewById(R.id.radiogroup);
+        r1 = findViewById(R.id.radioButton1);
+        r2 = findViewById(R.id.radioButton);
+        r3 = findViewById(R.id.radioButton2);
+        r4 = findViewById(R.id.radioButton3);
+        r5 = findViewById(R.id.radioButton4);
+        r6 = findViewById(R.id.radioButton5);
+        boolean checked = ((RadioButton) v).isChecked();
+
+        switch(v.getId()){
+            case R.id.radioButton:
+                if(checked)
+                    r2.setChecked(true);
+                break;
+
+            case R.id.radioButton1:
+                if(checked)
+                    r1.setChecked(true);
+                break;
+            case R.id.radioButton2:
+                if(checked)
+                    r3.setChecked(true);
+                break;
+            case R.id.radioButton3:
+                if(checked)
+                    r4.setChecked(true);
+                break;
+            case R.id.radioButton4:
+                if(checked)
+                    r5.setChecked(true);
+                break;
+            case R.id.radioButton5:
+                if(checked)
+                    r6.setChecked(true);
+                break;
+
+        }
+
+    }
+
+
 }
