@@ -17,12 +17,17 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class SlotBooking extends AppCompatActivity {
 
     ImageView mr,af1,af2,af3;
     Button b;
     TextView t;
     int mr1=0,aft1=0,aft2=0,aft3=0;
+    DatePickerDialog timePickerDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +42,15 @@ public class SlotBooking extends AppCompatActivity {
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Date c = Calendar.getInstance().getTime();
+//                System.out.println("Current time => " + c);
+//
+//                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+//                String formattedDate = df.format(c);
                 DatePickerDialog timePickerDialog = new DatePickerDialog(SlotBooking.this, new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        view.setMinDate(Calendar.getInstance());
                         String[] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
                         t.setText(dayOfMonth + " " + months[month] + "," + year);
                     }
@@ -116,6 +127,9 @@ public class SlotBooking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String s = t.getText().toString();
+
+                int year = Calendar.getInstance().get(Calendar.YEAR);
+
                 if(s.equals("Enter Date")){
                     Toast.makeText(getApplicationContext(),"Please select date",Toast.LENGTH_SHORT).show();
                 }
