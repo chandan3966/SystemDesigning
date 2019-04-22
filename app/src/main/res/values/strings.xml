@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SystemDesigning</string>
+    <string name="noteline">Note: You won\'t be able to do further process without providing proper details.</string>
 </resources>

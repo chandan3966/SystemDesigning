@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         b = findViewById(R.id.button);
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS useraccount(number VARCHAR,name VARCHAR,appliance VARCHAR);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Address(number VARCHAR,fname VARCHAR,lname VARCHAR,locality VARCHAR,district VARCHAR,state VARCHAR,country VARCHAR,pincode VARCHAR);");
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +57,19 @@ public class MainActivity extends AppCompatActivity {
                                 edit.putString("name",c.getString(1));
                                 edit.putString("appliances",c.getString(2));
                                 edit.commit();
-                                Intent i = new Intent(MainActivity.this,Main2Activity.class);
-                                startActivity(i);
-                                Toast.makeText(getApplicationContext(),"Exists",Toast.LENGTH_SHORT).show();
-                                finish();
+                                Cursor c2 = db.rawQuery("SELECT * FROM Address WHERE number='" + et.getText().toString() + "'", null);
+                                if (c2.getCount()!=0 && c2.moveToFirst()){
+                                    Intent i = new Intent(MainActivity.this,Main2Activity.class);
+                                    startActivity(i);
+                                    Toast.makeText(getApplicationContext(),"Exists",Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                                else{
+                                    Intent i = new Intent(MainActivity.this,AddressActivity.class);
+                                    startActivity(i);
+                                    Toast.makeText(getApplicationContext(),"Exists",Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
 
 
@@ -69,11 +79,13 @@ public class MainActivity extends AppCompatActivity {
                             sp = getSharedPreferences("mycredentials", Context.MODE_PRIVATE);
                             SharedPreferences.Editor edit = sp.edit();
                             edit.putString("phone",et.getText().toString());
+                            edit.putString("name","");
+                            edit.putString("appliances","");
                             edit.commit();
 
                             db.execSQL("INSERT INTO useraccount VALUES('" + et.getText().toString() + "','" + 0 + "','" + 0 + "');");
                             Toast.makeText(getApplicationContext(),"Inserted",Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(MainActivity.this,Main2Activity.class);
+                            Intent i = new Intent(MainActivity.this,Profile.class);
                             startActivity(i);
                             finish();
                         }

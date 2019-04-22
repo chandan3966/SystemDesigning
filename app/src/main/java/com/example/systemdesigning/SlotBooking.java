@@ -1,7 +1,9 @@
 package com.example.systemdesigning;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,8 +28,13 @@ public class SlotBooking extends AppCompatActivity {
     ImageView mr,af1,af2,af3;
     Button b;
     TextView t;
-    int mr1=0,aft1=0,aft2=0,aft3=0;
+    int mr1=0,aft1=0,aft2=0,aft3=0;//for image shifting
     DatePickerDialog timePickerDialog;
+    int[] times = {11,1,3,5};
+    SharedPreferences sp;
+    int timepick = 0;
+    int finaltime = 0;
+    String finaldate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +45,17 @@ public class SlotBooking extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
         }
+        sp = getSharedPreferences("mycredentials",Context.MODE_PRIVATE);
+        final String phone = sp.getString("phone","NA");
+        final String names = sp.getString("name","NA");
+        final String aplis = sp.getString("appliances","NA");
+        final String service = sp.getString("service","NA");
+        final int price = sp.getInt("price",0);
+
         t = findViewById(R.id.textView4);
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Date c = Calendar.getInstance().getTime();
-//                System.out.println("Current time => " + c);
-//
-//                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-//                String formattedDate = df.format(c);
                 DatePickerDialog timePickerDialog = new DatePickerDialog(SlotBooking.this, new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -67,10 +76,12 @@ public class SlotBooking extends AppCompatActivity {
                 if (mr1 == 0){
                     mr.setImageResource(R.drawable.morning1);
                     mr1++;
+                    timepick += 1;
                 }
                 else{
                     mr.setImageResource(R.drawable.morning);
                     mr1--;
+                    timepick -= 1;
                 }
             }
         });
@@ -83,10 +94,12 @@ public class SlotBooking extends AppCompatActivity {
                 if (aft1 == 0){
                     af1.setImageResource(R.drawable.afternoon11);
                     aft1++;
+                    timepick += 2;
                 }
                 else{
                     af1.setImageResource(R.drawable.afternoon1);
                     aft1--;
+                    timepick -= 2;
                 }
             }
         });
@@ -98,10 +111,12 @@ public class SlotBooking extends AppCompatActivity {
                 if (aft2 == 0){
                     af2.setImageResource(R.drawable.afternoon21);
                     aft2++;
+                    timepick += 3;
                 }
                 else{
                     af2.setImageResource(R.drawable.afternoon2);
                     aft2--;
+                    timepick -= 3;
                 }
             }
         });
@@ -113,10 +128,12 @@ public class SlotBooking extends AppCompatActivity {
                 if (aft3 == 0){
                     af3.setImageResource(R.drawable.afternoon31);
                     aft3++;
+                    timepick += 4;
                 }
                 else{
                     af3.setImageResource(R.drawable.afternoon3);
                     aft3--;
+                    timepick -= 4;
                 }
 
             }
@@ -140,6 +157,18 @@ public class SlotBooking extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please select one time slot",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    finaltime = times[timepick-1];
+                    finaldate = t.getText().toString();
+                    sp = getSharedPreferences("mycredentials", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = sp.edit();
+                    edit.putString("phone",phone);
+                    edit.putString("name",names);
+                    edit.putString("appliances",aplis);
+                    edit.putString("service",service);
+                    edit.putInt("price",price);
+                    edit.putInt("time",finaltime);
+                    edit.putString("date",finaldate);
+                    edit.commit();
                     Intent i = new Intent(SlotBooking.this,BookingSummary.class);
                     startActivity(i);
                     YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(b);

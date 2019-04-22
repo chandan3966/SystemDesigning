@@ -19,7 +19,7 @@ public class Profile extends AppCompatActivity {
 
     SQLiteDatabase db;
     Button b;
-    SharedPreferences sp,sp1,sp0;
+    SharedPreferences sp,sp1;
     EditText e1,e2,e3;
 
     @Override
@@ -57,6 +57,7 @@ public class Profile extends AppCompatActivity {
         }
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
 
+
 //        sp = getSharedPreferences("Profiledetails", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit = sp.edit();
 //        edit.putString("phone",et.getText().toString());
@@ -66,6 +67,9 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 if (e2.getText().toString().length()<10){
                     Toast.makeText(getApplicationContext(),"Please enter valid number",Toast.LENGTH_SHORT).show();
+                }
+                else if (e1.getText().toString().length()<5){
+                    Toast.makeText(getApplicationContext(),"Username shouldn't be less than 5 characters",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Cursor c = db.rawQuery("SELECT * FROM useraccount WHERE number='" + e2.getText().toString() + "'", null);
@@ -80,10 +84,18 @@ public class Profile extends AppCompatActivity {
                         edit.putString("phone",e2.getText().toString());
                         edit.putString("appliances",e3.getText().toString());
                         edit.commit();
-                        Intent i = new Intent(Profile.this,Main2Activity.class);
-                        startActivity(i);
-                        finish();
+                        Cursor c1 = db.rawQuery("SELECT * FROM Address WHERE number='" + phone + "'", null);
+                        if (c1.getCount()!=0 && c1.moveToFirst()){
 
+                            Intent i = new Intent(Profile.this,Main2Activity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        else {
+                            Intent i = new Intent(Profile.this,AddressActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
 
                     }
                 }

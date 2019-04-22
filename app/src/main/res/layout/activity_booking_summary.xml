@@ -50,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/slot1"
+                android:id="@+id/slot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -69,18 +69,18 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date2"
+                app:layout_constraintTop_toBottomOf="@+id/service"
                 app:srcCompat="@drawable/line" />
 
             <TextView
-                android:id="@+id/date2"
+                android:id="@+id/service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="AC Gas Filling and Refilling"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/slot1" />
+                app:layout_constraintTop_toBottomOf="@+id/slot" />
 
             <TextView
                 android:id="@+id/serviceamt"
@@ -90,7 +90,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="Rs.0"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/slot1" />
+                app:layout_constraintTop_toBottomOf="@+id/slot" />
 
             <TextView
                 android:id="@+id/total1"
@@ -141,16 +141,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/date2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="20 April,2019"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/slot1" />
-
-            <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,7 +148,17 @@
                 android:layout_marginTop="8dp"
                 android:text="11:00am to 1:00pm"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date2" />
+                app:layout_constraintTop_toBottomOf="@+id/date" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="20 April,2019"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slot1" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -181,7 +181,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="#fff"
-                android:text="Add Address"
+                android:text="Update Address"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

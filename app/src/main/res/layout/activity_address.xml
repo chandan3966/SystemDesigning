@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/fname"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -73,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/lname"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -85,10 +85,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.276"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/fname" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/local"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -100,10 +100,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+            app:layout_constraintTop_toBottomOf="@+id/lname" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/dist"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -115,10 +115,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText4" />
+            app:layout_constraintTop_toBottomOf="@+id/local" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/state"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -130,10 +130,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText5" />
+            app:layout_constraintTop_toBottomOf="@+id/dist" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/country"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -145,10 +145,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.275"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintTop_toBottomOf="@+id/state" />
 
         <EditText
-            android:id="@+id/editText8"
+            android:id="@+id/pin"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -160,7 +160,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText7" />
+            app:layout_constraintTop_toBottomOf="@+id/country" />
 
         <TextView
             android:id="@+id/textView5"
