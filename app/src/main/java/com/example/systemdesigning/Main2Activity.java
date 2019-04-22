@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -16,10 +17,19 @@ import com.daimajia.androidanimations.library.YoYo;
 public class Main2Activity extends AppCompatActivity {
 
     ImageView im;
+    Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        b = findViewById(R.id.profile);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Main2Activity.this,Profile.class);
+                startActivity(i);
+            }
+        });
         im = findViewById(R.id.acservice);
         if (Build.VERSION.SDK_INT >= 21){
             Window window = this.getWindow();
