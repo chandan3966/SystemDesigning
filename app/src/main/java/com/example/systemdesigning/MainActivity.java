@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,6 +19,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.READ_SMS;
+import static android.Manifest.permission.RECEIVE_SMS;
+import static android.Manifest.permission.SEND_SMS;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         et = findViewById(R.id.editText);
         b = findViewById(R.id.button);
 
+        if(!checkPermission())
+        {
+            requestPermission();
+        }
 
 
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
@@ -108,10 +119,79 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
 
 
+        private boolean checkPermission() {
+
+            int result = ContextCompat.checkSelfPermission(getApplicationContext(), RECEIVE_SMS);
+            int result4 = ContextCompat.checkSelfPermission(getApplicationContext(), SEND_SMS);
+
+            return result == PackageManager.PERMISSION_GRANTED && result4 == PackageManager.PERMISSION_GRANTED;
+        }
+
+        private void requestPermission() {
+
+            ActivityCompat.requestPermissions(this, new String[]{RECEIVE_SMS,SEND_SMS}, PERMISSION_REQUEST_CODE);
+
+        }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+
+                    boolean messageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean messageAccepted1 = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                    if (messageAccepted && messageAccepted1)
+                    {
+                        Toast.makeText(MainActivity.this, "Permissions provided", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (shouldShowRequestPermissionRationale(RECEIVE_SMS)) {
+                                showMessageOKCancel("You need to allow access to the required permissions",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    requestPermissions(new String[]{RECEIVE_SMS,SEND_SMS},
+                                                            PERMISSION_REQUEST_CODE);
+                                                }
+                                            }
+                                        });
+                                return;
+                            }
+
+                        }
+
+                    }
+                }
 
 
+                break;
+        }
+    }
 
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                        finish();
+                    }
+                })
+                .create()
+                .show();
     }
 }
