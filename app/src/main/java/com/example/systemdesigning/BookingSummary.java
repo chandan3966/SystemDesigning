@@ -20,8 +20,9 @@ import android.widget.Toast;
 public class BookingSummary extends AppCompatActivity {
 
     Button b,b2;
-    SharedPreferences sp;
+    SharedPreferences sp,sp1;
     SQLiteDatabase db;
+    String fn,ln;
     TextView service,serviceamt,rcfinal,date,time,local,state,country,pho;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,19 @@ public class BookingSummary extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
         }
+        db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS Request(number VARCHAR,name VARCHAR,service VARCHAR,serviceamt VARCHAR,date VARCHAR,time VARCHAR,loacl VARCHAR,state VARCHAR,country VARCHAR);");
+
         b2 = findViewById(R.id.button2);
         service = findViewById(R.id.service);
         serviceamt = findViewById(R.id.serviceamt);
         rcfinal = findViewById(R.id.rcfinal);
         date = findViewById(R.id.date);
         time = findViewById(R.id.time);
+        local = findViewById(R.id.local);
+        state = findViewById(R.id.state);
+        country = findViewById(R.id.country);
+        pho = findViewById(R.id.phone);
 
         sp = getSharedPreferences("mycredentials", Context.MODE_PRIVATE);
         final String phone = sp.getString("phone","NA");
@@ -63,19 +71,17 @@ public class BookingSummary extends AppCompatActivity {
             state.setText(c.getString(5));
             country.setText(c.getString(6));
             pho.setText(c.getString(0));
+            fn = c.getString(1);
+            ln = c.getString(2);
         }
 
 
-        db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS Request(number VARCHAR,service VARCHAR,serviceamt VARCHAR,date VARCHAR,time VARCHAR);");
 
 
         b = findViewById(R.id.address);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                     Intent i = new Intent(BookingSummary.this,AddressActivity.class);
                     startActivity(i);
 
@@ -90,7 +96,7 @@ public class BookingSummary extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Slot Already Booked",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    db.execSQL("INSERT INTO Request VALUES('" + phone + "','" + services + "','" + serviceamt.getText().toString() + "','" + time.getText().toString() + "','" + dates + "');");
+                    db.execSQL("INSERT INTO Request VALUES('" + phone + "','" + (fn+" "+ln) + "','" + services + "','" + serviceamt.getText().toString() + "','" + time.getText().toString() + "','" + dates + "','" + local.getText().toString() + "','" + state.getText().toString() + "','" + country.getText().toString() + "');");
                     showdialogbox();
                 }
             }

@@ -80,12 +80,9 @@ public class ServiceSelection extends AppCompatActivity {
 
 
 
-
-
     }
 
     public void onclicked(View v){
-
         boolean checked = ((RadioButton) v).isChecked();
 
         switch(v.getId()){
@@ -128,6 +125,7 @@ public class ServiceSelection extends AppCompatActivity {
                 break;
 
         }
+//        Toast.makeText(getApplicationContext(),radioon,Toast.LENGTH_SHORT).show();
 
     }
 

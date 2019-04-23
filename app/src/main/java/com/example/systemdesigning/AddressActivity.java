@@ -44,6 +44,15 @@ public class AddressActivity extends AppCompatActivity {
         final String phone = sp.getString("phone","NA");
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
         Cursor c = db.rawQuery("SELECT * FROM Address WHERE number='" + phone + "'", null);
+        if (c.getCount()!=0 && c.moveToFirst()){
+            e1.setText(c.getString(1));
+            e2.setText(c.getString(2));
+            e3.setText(c.getString(3));
+            e4.setText(c.getString(4));
+            e5.setText(c.getString(5));
+            e6.setText(c.getString(6));
+            e7.setText(c.getString(7));
+        }
 //        db.execSQL("CREATE TABLE IF NOT EXISTS Address(number VARCHAR,fname VARCHAR,lname VARCHAR,locality VARCHAR,district VARCHAR,state VARCHAR,country VARCHAR,pincode VARCHAR);");
         button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
@@ -56,17 +65,20 @@ public class AddressActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please Enter a Valid Address",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Cursor c = db.rawQuery("SELECT * FROM Address WHERE number='" + phone + "'", null);
-                    if (c.getCount()!=0 && c.moveToFirst()){
+                    Cursor c1 = db.rawQuery("SELECT * FROM Address WHERE number='" + phone + "'", null);
+                    if (c1.getCount()!=0 && c1.moveToFirst()){
                         db.execSQL("UPDATE Address SET fname='" + e1.getText().toString() + "',lname='" + e2.getText().toString() + "',locality='" + e3.getText().toString() + "',district='" + e4.getText().toString() + "',state='" + e5.getText().toString() + "',country='" + e6.getText().toString() + "',pincode='" + e7.getText().toString() + "' WHERE number='" + phone + "'");
-
+                        Intent i = new Intent(AddressActivity.this,BookingSummary.class);
+                        startActivity(i);
+                        finish();
                     }
                     else {
                         db.execSQL("INSERT INTO Address VALUES('" + phone + "','" + e1.getText().toString() + "','" + e2.getText().toString() + "','" + e3.getText().toString() + "','" + e4.getText().toString() + "','" + e5.getText().toString() + "','" + e6.getText().toString() + "','" + e7.getText().toString() + "');");
+                        Intent i = new Intent(AddressActivity.this,Main2Activity.class);
+                        startActivity(i);
+                        finish();
                     }
-                    Intent i = new Intent(AddressActivity.this,Main2Activity.class);
-                    startActivity(i);
-                    finish();
+
                 }
             }
         });
