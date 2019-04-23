@@ -15,12 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 public class Profile extends AppCompatActivity {
 
     SQLiteDatabase db;
-    Button b;
+    Button b,b1;
     SharedPreferences sp,sp1;
     EditText e1,e2,e3;
+    boolean visible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class Profile extends AppCompatActivity {
         e2 = findViewById(R.id.number);
         e3 = findViewById(R.id.brand);
         b = findViewById(R.id.button2);
+        b1 = findViewById(R.id.bhistory);
 
         if (Build.VERSION.SDK_INT >= 21){
             Window window = this.getWindow();
@@ -56,8 +61,23 @@ public class Profile extends AppCompatActivity {
             e3.setText(aplis);
         }
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
+        Cursor c1 = db.rawQuery("SELECT * FROM Request WHERE number='" +phone + "'", null);
+        if (c1.getCount()!=0){
+            b1.setVisibility(View.VISIBLE);
+        }
+        else{
+            b1.setVisibility(View.INVISIBLE);
+        }
 
-
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Profile.this,BookingHistory.class);
+                startActivity(i);
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(b1);
+                finish();
+            }
+        });
 //        sp = getSharedPreferences("Profiledetails", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor edit = sp.edit();
 //        edit.putString("phone",et.getText().toString());
@@ -70,6 +90,9 @@ public class Profile extends AppCompatActivity {
                 }
                 else if (e1.getText().toString().length()<5){
                     Toast.makeText(getApplicationContext(),"Username shouldn't be less than 5 characters",Toast.LENGTH_SHORT).show();
+                }
+                else if (e3.getText().toString().length()<3){
+                    Toast.makeText(getApplicationContext(),"Appliance should be valid",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Cursor c = db.rawQuery("SELECT * FROM useraccount WHERE number='" + e2.getText().toString() + "'", null);
