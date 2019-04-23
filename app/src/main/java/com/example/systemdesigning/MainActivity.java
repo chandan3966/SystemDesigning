@@ -1,10 +1,17 @@
 package com.example.systemdesigning;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button b;
     SQLiteDatabase db;
     SharedPreferences sp;
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         et = findViewById(R.id.editText);
         b = findViewById(R.id.button);
+
+
+
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS useraccount(number VARCHAR,name VARCHAR,appliance VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS Address(number VARCHAR,fname VARCHAR,lname VARCHAR,locality VARCHAR,district VARCHAR,state VARCHAR,country VARCHAR,pincode VARCHAR);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Request(number VARCHAR,name VARCHAR,service VARCHAR,serviceamt VARCHAR,date VARCHAR,time VARCHAR,loacl VARCHAR,state VARCHAR,country VARCHAR);");
+
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
 
 
     }
