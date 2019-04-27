@@ -1,6 +1,7 @@
 package com.example.systemdesigning;
 
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,7 @@ public class BookingSummary extends AppCompatActivity {
     Button b,b2;
     SharedPreferences sp,sp1;
     SQLiteDatabase db;
+    ProgressDialog progress;
     String fn,ln,pin;
     String phone,message,operator;
     TextView service,serviceamt,rcfinal,date,time,local,state,country,pho;
@@ -42,6 +44,11 @@ public class BookingSummary extends AppCompatActivity {
         }
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
 
+        progress = new ProgressDialog(this);
+        progress.setMessage("Please wait..");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setIndeterminate(true);
+        progress.setCanceledOnTouchOutside(false);
 
         b2 = findViewById(R.id.button2);
         service = findViewById(R.id.service);
@@ -129,14 +136,20 @@ public class BookingSummary extends AppCompatActivity {
                 Intent intent=new Intent(getApplicationContext(),BookingHistory.class);
                 PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
                 SmsManager sms= SmsManager.getDefault();
-                Timer t = new Timer();
-                t.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        SmsManager sms1= SmsManager.getDefault();
-                        sms1.sendTextMessage(phone,null,message,null,null);
+                int p = 0;
+                String[] pk = {phone,"8220341247"};
+                while(p<pk.length){
+                    if(p == 0){
+                        sms.sendTextMessage(pk[p],null,message,null,null);
                     }
-                },1000);
+                    else{
+                        sms.sendTextMessage(pk[p],null,operator,null,null);
+                    }
+                    p++;
+
+                }
+                SmsManager sms1= SmsManager.getDefault();
+
                 sms.sendTextMessage("8220341247",null,operator,pi,null);
                 Toast.makeText(getApplicationContext(), "Your Request will be proceeded soon!",
                         Toast.LENGTH_LONG).show();

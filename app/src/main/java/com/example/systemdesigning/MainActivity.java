@@ -48,9 +48,69 @@ public class MainActivity extends AppCompatActivity {
 
 
         db = openOrCreateDatabase("ServiceDB", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS login(status VARCHAR,number VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS useraccount(number VARCHAR,name VARCHAR,appliance VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS Address(number VARCHAR,fname VARCHAR,lname VARCHAR,locality VARCHAR,district VARCHAR,state VARCHAR,country VARCHAR,pincode VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS Request(number VARCHAR,name VARCHAR,service VARCHAR,serviceamt VARCHAR,date VARCHAR,time VARCHAR,loacl VARCHAR,state VARCHAR,country VARCHAR);");
+
+        Cursor a = db.rawQuery("SELECT * FROM login", null);
+        if (a.getCount()==1 && a.moveToFirst()){
+            if (a.getString(0).equals("1")){
+                Cursor c = db.rawQuery("SELECT * FROM useraccount WHERE number='" +a.getString(1) + "'", null);
+                if(c.getCount()!=0 && c.moveToFirst()){
+                    if (c.getString(1).equals("0") || c.getString(2).equals("0")){
+                        sp = getSharedPreferences("mycredentials", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sp.edit();
+                        edit.putString("phone",a.getString(1));
+                        edit.putString("name","");
+                        edit.putString("appliances","");
+                        edit.commit();
+                        Toast.makeText(getApplicationContext(),"Kindly check Name or Appliance",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this,Profile.class);
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(),"Exists",Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else{
+                        sp = getSharedPreferences("mycredentials", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sp.edit();
+                        edit.putString("phone",a.getString(1));
+                        edit.putString("name",c.getString(1));
+                        edit.putString("appliances",c.getString(2));
+                        edit.commit();
+                        Cursor c2 = db.rawQuery("SELECT * FROM Address WHERE number='" + a.getString(1) + "'", null);
+                        if (c2.getCount()!=0 && c2.moveToFirst()){
+                            Intent i = new Intent(MainActivity.this,Main2Activity.class);
+                            startActivity(i);
+                            Toast.makeText(getApplicationContext(),"Exists",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else{
+                            Intent i = new Intent(MainActivity.this,AddressActivity.class);
+                            startActivity(i);
+                            Toast.makeText(getApplicationContext(),"Exists",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
+
+
+                }
+                else{
+                    sp = getSharedPreferences("mycredentials", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = sp.edit();
+                    edit.putString("phone",a.getString(1));
+                    edit.putString("name","");
+                    edit.putString("appliances","");
+                    edit.commit();
+
+                    db.execSQL("INSERT INTO useraccount VALUES('" + a.getString(1) + "','" + 0 + "','" + 0 + "');");
+                    Toast.makeText(getApplicationContext(),"Inserted",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,Profile.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        }
 
 
         b.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Invalid number",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    db.execSQL("DELETE FROM login ");
+                    db.execSQL("INSERT INTO login VALUES('" + "1" + "','" + et.getText().toString() + "');");
                     Cursor c = db.rawQuery("SELECT * FROM useraccount WHERE number='" + et.getText().toString() + "'", null);
                         if(c.getCount()!=0 && c.moveToFirst()){
                             if (c.getString(1).equals("0") || c.getString(2).equals("0")){

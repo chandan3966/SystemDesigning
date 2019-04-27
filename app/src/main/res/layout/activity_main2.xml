@@ -20,7 +20,7 @@
             android:layout_marginTop="-10dp"
             android:background="@drawable/toolbar"
             app:title="Appliance Service"
-            app:titleMarginStart="60dp"
+            app:titleMarginStart="40dp"
             app:titleTextColor="#fff">
 
 
@@ -28,11 +28,19 @@
 
         <Button
             android:id="@+id/profile"
-            android:layout_width="38dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="310dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/ic_person_black_24dp" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_power_settings_new_black_24dp" />
     </FrameLayout>
 
     <ImageView
