@@ -82,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/brand"
             android:layout_width="273dp"
             android:layout_height="wrap_content"
@@ -93,6 +93,8 @@
             android:ems="10"
             android:hint="AC Brand"
             android:inputType="textPersonName"
+            android:completionThreshold="1"
+            android:completionHint="Select brand"
             android:paddingLeft="10dp"
             app:layout_constraintBottom_toTopOf="@+id/bhistory"
             app:layout_constraintEnd_toEndOf="parent"

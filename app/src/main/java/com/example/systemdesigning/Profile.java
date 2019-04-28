@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import java.util.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,13 +21,18 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Profile extends AppCompatActivity {
 
     SQLiteDatabase db;
     Button b,b1;
     SharedPreferences sp,sp1;
-    EditText e1,e2,e3;
+    EditText e1,e2;
+    AutoCompleteTextView e3;
     boolean visible;
+    String[] countries = new String[]{"Haier","Daikin","Voltas","LG","Mitsubishi","Bluestar","Hitachi","Samsung","Carrier","Godrej","Whirlpool"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,10 @@ public class Profile extends AppCompatActivity {
         e3 = findViewById(R.id.brand);
         b = findViewById(R.id.button2);
         b1 = findViewById(R.id.bhistory);
+
+        ArrayAdapter<String> ada = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,countries);
+        e3.setAdapter(ada);
+
 
         if (Build.VERSION.SDK_INT >= 21){
             Window window = this.getWindow();
@@ -85,13 +97,14 @@ public class Profile extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (e2.getText().toString().length()<10){
                     Toast.makeText(getApplicationContext(),"Please enter valid number",Toast.LENGTH_SHORT).show();
                 }
                 else if (e1.getText().toString().length()<5){
                     Toast.makeText(getApplicationContext(),"Username shouldn't be less than 5 characters",Toast.LENGTH_SHORT).show();
                 }
-                else if (e3.getText().toString().length()<3){
+                else if (e3.getText().toString().length()<3 && !(Arrays.asList(countries).contains(e3.getText().toString()))){
                     Toast.makeText(getApplicationContext(),"Appliance should be valid",Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -126,5 +139,10 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static boolean useSet(String[] arr, String targetValue) {
+        Set<String> set = new HashSet<String>(Arrays.asList(arr));
+        return set.contains(targetValue);
     }
 }

@@ -120,7 +120,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/local" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/state"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
@@ -128,19 +128,23 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
-            android:hint="state *"
+            android:hint="State *"
             android:inputType="textPersonName"
+            android:completionThreshold="1"
+            android:completionHint="select state"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dist" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/country"
             android:layout_width="332dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:completionThreshold="1"
+            android:completionHint="select country"
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="Country *"
@@ -159,7 +163,7 @@
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="Pincode *"
-            android:inputType="textPersonName"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.277"
             app:layout_constraintStart_toStartOf="parent"
