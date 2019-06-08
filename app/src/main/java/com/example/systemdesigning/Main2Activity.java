@@ -20,7 +20,7 @@ import com.daimajia.androidanimations.library.YoYo;
 
 public class Main2Activity extends AppCompatActivity {
 
-    ImageView im;
+    ImageView im,im1,im2,im3,im4,im5,im6,im7,im8;
     SharedPreferences sp;
     Button b,out;
     String phone;
@@ -59,6 +59,14 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
         im = findViewById(R.id.acservice);
+        im1 = findViewById(R.id.washing);
+        im2 = findViewById(R.id.dishwash);
+        im3 = findViewById(R.id.tv);
+        im4 = findViewById(R.id.heater);
+        im5 = findViewById(R.id.fridge);
+        im6 = findViewById(R.id.sound);
+        im7 = findViewById(R.id.chimney);
+        im8 = findViewById(R.id.dish);
         if (Build.VERSION.SDK_INT >= 21){
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -72,6 +80,54 @@ public class Main2Activity extends AppCompatActivity {
                 Intent i = new Intent(Main2Activity.this,ServiceSelection.class);
                 startActivity(i);
                 Animatoo.animateFade(Main2Activity.this);
+            }
+        });
+        im1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im1);
+            }
+        });
+        im2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im2);
+            }
+        });
+        im3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im3);
+            }
+        });
+        im4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im4);
+            }
+        });
+        im5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im5);
+            }
+        });
+        im6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im6);
+            }
+        });
+        im7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im7);
+            }
+        });
+        im8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.RubberBand).duration(600).repeat(0).playOn(im8);
             }
         });
 
